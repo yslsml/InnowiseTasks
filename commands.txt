@@ -1,88 +1,20 @@
 1. 
-sudo useradd -m -d /home/raymond -g users -s /bin/bash raymond
-
-sudo passwd raymond
-
-# id raymond
-
-sudo useradd -m -d /home/john -g users -s /bin/bash john
-
-# id john
-
-sudo passwd john
+df | awk 'BEGIN{OFS="\t"} {print $1,$5,$6}'
 
 2.
-sudo su - raymond
-
-mkdir .ssh
-
-touch .ssh/authorized_keys
-
-ssh-keygen
-
-cp id_rsa.pub /home/raymond/.ssh/authorized_keys
-
-chmod 700 ~/.ssh
-
-chmod 600 ~/.ssh/authorized_keys
-
-ssh-copy-id username@remote_host
-
-# then (on server):
-
-sudo nano /etc/ssh/sshd_config
-
-PasswordAuthentication no
-
-sudo service ssh restart
+# du -a -h /etc | sort -n -r | head -10
+find /etc -type f -exec du {} + | sort -r -n | head -10
 
 3.
-sudo -i  # for yslsml
-
-visudo 
-
-raymond ALL=(ALL) NOPASSWD: ALL  # in the end of the file
-
-sudo usermod -aG sudo raymond
+nano task1_2.txt
 
 4.
-# for raymond:
-
-echo "Hello, world!" > text.txt
-
-chmod 744 text.txt
-
-# for john:
-
-nano script.sh 
-
-echo "My script!”
-
-chmod 755 script.sh
+awk '/\/A$/' task1_2.txt
 
 5.
-sudo chsh -s /bin/bash john
-
-sudo useradd -m -d /home/testuser -s /bin/sh testuser
-
-sudo passwd testuser
+awk '/\/bin\/bash/{print NR,$0}' /etc/passwd >> /home/yslsml/testawk/result.txt
 
 6.
-sudo -i
-
-groupadd johngroup
-
-sudo usermod -aG johngroup john
-
-sudo usermod -aG johngroup testuser
-
-# doesn't work :(
-
-7.
-scp file root@ip:/root
-
-scp -r folder root@ip:/root/
-
-scp root@ip:/root/file local_folder
-
-scp -r root@ip:/root/folder_on_server local_folder
+nano passwdbackup
+# awk 'BEGIN{FS=":"; OFS=":"} /\/bin\/sh/ {$7="/bin/bash"; print NR,$0;}' passwdbackup
+sed -i 's/\/bin\/sh/\/bin\/bash/g' passwdbackup
