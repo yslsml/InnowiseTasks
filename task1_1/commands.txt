@@ -76,7 +76,7 @@ sudo usermod -aG johngroup john
 
 sudo usermod -aG johngroup testuser
 
-# doesn't work :(
+sudo chown :johngroup /home/john/script.sh
 
 7.
 scp file root@ip:/root
