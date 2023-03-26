@@ -12,7 +12,7 @@ nano task1_2.txt
 awk '/\/A$/' task1_2.txt
 
 5.
-awk '/\/bin\/bash/{print NR,$0}' /etc/passwd >> /home/yslsml/testawk/result.txt
+awk '/\/bin\/bash/{print NR,$0}' /etc/passwd >> /home/parallels/Documents/result.txt
 
 6.
 nano passwdbackup
