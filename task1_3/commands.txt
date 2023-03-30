@@ -1,0 +1,93 @@
+1.
+nano /home/parallels/Documents/scriptforsystemd.sh
+#!/bin/bash
+while (true) 
+do
+ uptime >> /home/parallels/Documents/outputforscript;
+ sleep 15; 
+done;
+
+touch /home/parallels/Documents/outputforscript
+
+nano /etc/systemd/system/myfirstunit.service
+[Unit]
+Description=MyUnit
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/parallels/Documents/scriptforsystemd.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl daemon-reload
+systemctl restart myfirstunit.service
+systemctl status myfirstunit.service
+
+top 
+kill -9 PID
+systemctl status myfirstunit.service
+
+2.
+nano /home/parallels/Documents/scriptforsystemd.sh
+#!/bin/bash
+while (true) 
+do
+ load_avg=$(uptime | sed -n 's/.*load average: \([^,]*\),.*/\1/p')
+ uptime >> /home/parallels/Documents/outputforscript
+ if (( $(echo "$load_avg > 1" | bc -l) )) 
+ then
+  uptime >> /home/parallels/Documents/overload
+ fi
+ sleep 15
+done
+
+systemctl restart myfirstunit.service
+systemctl status myfirstunit.service
+
+3.
+apt update
+apt install stress
+stress --cpu 2 --timeout 50s
+
+cat /home/parallels/Documents/overload
+
+4.
+nano /home/parallels/Documents/scriptforsystemd.sh
+#!/bin/bash
+while (true) 
+do
+ load_avg=$(uptime | sed -n 's/.*load average: \([^,]*\),.*/\1/p')
+ size_of_overload_file=$(du -a /home/parallels/Documents/ | awk 
+'/overload/{print $1}')
+ uptime >> /home/parallels/Documents/outputforscript
+ if (( $(echo "$load_avg > 1" | bc -l) )) 
+ then
+  uptime >> /home/parallels/Documents/overload
+ fi
+ if [[ $size_of_overload_file -ge 50 ]] 
+ then
+  echo "" > /home/parallels/Documents/overload;
+  echo "$(date) - successful cleanup!" >> /home/parallels/Documents/cleanup
+ fi
+ sleep 15
+done
+
+systemctl restart myfirstunit.service
+systemctl status myfirstunit.service
+
+5.
+crontab -e
+*/10 * * * * systemctl status myfirstunit.service >> /home/parallels/Documents/cronoutput
+
+6.
+ping 8.8.8.8 > pingoutput
+Ctrl+Z, bg
+jobs
+fg %ID
+Ctrl+Z, 
+ps -a
+kill -9 PID
