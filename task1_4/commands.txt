@@ -9,3 +9,29 @@ ln /tmp/test_123 /tmp/hard_link
 ls -li /tmp | grep hard_link
 
 sudo df -hi /tmp 
+
+2.
+lsblk 
+fdisk /dev/sdb 
+mkfs.xfs /dev/sdb1  
+
+mkdir /mnt/disk1 
+chmod -R 660 /mnt/disk1 
+nano /etc/fstab 
+/dev/sdb1 /mnt/disk1 xfs defaults 0 0
+mount /dev/sdb1 /mnt/disk1 
+
+echo "Some file in xfs file system" > /mnt/disk1/testfile
+df -hT
+
+fdisk /dev/sdb
+
+reboot  
+
+xfs_growfs -d /mnt/disk1 
+apt install cloud-guest-utils
+growpart /dev/sdb 1
+xfs_growfs -d /mnt/disk1
+
+cat /mnt/disk1/testfile
+df -hT
