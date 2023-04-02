@@ -1,0 +1,11 @@
+1. 
+mkdir /home/parallels/test
+echo "My test_123 file for symlink task." > /home/parallels/test/test_123
+
+ln -s /home/parallels/test/test_123 /tmp/soft_link
+cp /tmp/soft_link /tmp/test_123
+ls -li /tmp | grep test_123
+ln /tmp/test_123 /tmp/hard_link
+ls -li /tmp | grep hard_link
+
+sudo df -hi /tmp 
