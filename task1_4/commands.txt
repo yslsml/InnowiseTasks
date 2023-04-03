@@ -35,3 +35,50 @@ xfs_growfs -d /mnt/disk1
 
 cat /mnt/disk1/testfile
 df -hT
+
+3.
+df -hT
+pvs
+lvs
+vgs
+
+pvcreate /dev/sdc 
+pvcreate /dev/sdd
+pvdisplay
+
+vgcreate myvg /dev/sdc
+vgdisplay
+
+lvcreate myvg -n mylv1 -L 508M
+lvcreate myvg -n mylv2 -L 508M
+lvdisplay
+
+mkfs.xfs /dev/myvg/mylv1
+mkfs.xfs /dev/myvg/mylv2
+
+mkdir /mnt/mylv1disk
+mkdir /mnt/mylv2disk
+chmod -R 660 /mnt/mylv1disk
+chmod -R 660 /mnt/mylv2disk
+
+nano /etc/fstab
+/dev/myvg/mylv1 /mnt/mylv1disk xfs defaults 0 0
+/dev/myvg/mylv2 /mnt/mylv2disk xfs defaults 0 0
+
+mount /dev/myvg/mylv1 /mnt/mylv1disk
+mount /dev/myvg/mylv2 /mnt/mylv2disk
+
+df -hT
+
+vgextend myvg /dev/sdd
+vgdisplay
+
+lvresize -L 1.4G  myvg/mylv1
+lvdisplay
+
+xfs_growfs -d /mnt/mylv1disk
+
+df -hT
+pvs
+lvs
+vgs
