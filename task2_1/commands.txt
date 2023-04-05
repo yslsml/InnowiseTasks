@@ -1,0 +1,35 @@
+1.
+mkdir devops-task1
+cd devops-task1
+git init
+cp /opt/homebrew/etc/nginx/nginx.conf .
+
+2.
+nano README.md
+В данном репозитории находится дефолтный конфигурационный файл nginx
+git add nginx.conf
+git commit -m "add nginx.conf file"
+git add README.md
+git commit -m "add README.md file"
+
+3.
+git log
+git status
+
+5.
+git remote add github git@github.com:yslsml/rebrain-devops-task1.git
+git push github master
+git remote add gitlab 
+https://gitlab-trainee.inno.ws/milana.antonova/rebrain-devops-task1.git
+git push gitlab master
+git remote add bitbucket 
+git@bitbucket.org:rebrain-devops-task1-yslsml/rebrain-devops-task1.git
+ssh -T git@bitbucket.org
+git push bitbucket master
+
+6.
+git clone 
+https://gitlab-trainee.inno.ws/git-moodle-cource/git-checkout.git
+git checkout HASH
+cat deleted.txt
+
