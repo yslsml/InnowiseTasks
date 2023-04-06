@@ -1,0 +1,33 @@
+1.
+git merge develop # из ветки master
+git push gitlab master
+
+2.
+git clone 
+ssh://git@gitlab-trainee.inno.ws:54995/git-moodle-cource/git-merge.git
+git checkout develop
+git merge feature
+cat main.go
+git log HEAD...MERGE_HEAD
+git show 0c220
+nano main.go
+git add main.go
+git commit -m "fix conflict using git log"
+git status
+
+3.
+git checkout master
+git merge develop
+cat main.go
+git log HEAD...MERGE_HEAD
+git show 9ca6af1
+git show d2ae189
+nano main.go
+git add main.go
+git commit -m "fix merge conflict"
+git status
+
+4.
+git remote add gitlab 
+https://gitlab-trainee.inno.ws/milana.antonova/devops-task-merge.git
+git push gitlab --all
