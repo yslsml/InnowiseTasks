@@ -1,0 +1,45 @@
+1.
+git branch develop 
+git branch feature/new-site 
+
+2.
+git checkout develop
+nano nginx.conf
+git add .
+git commit -m "edit worker_connections value in nginx.conf"
+nano nginx.conf
+    # включаем сжатие
+    gzip  on;
+    # определяет MIME типы, для которых будет работать сжатие
+    gzip_types application/json;
+git add .
+git commit -m "enable response compression for the application/json type"
+
+3.
+git checkout feature/new-site
+mkdir conf.d
+touch conf.d/mysite.domain.com.conf
+nano conf.d/mysite.domain.com.conf
+git commit -am "add conf.d/mysite.domain.com.conf file with a basic 
+description of a static site"
+
+4.
+git checkout develop
+git tag v0.1
+git show
+
+5.
+git checkout feature/new-site
+touch .gitignore
+nano .gitignore # tmp/
+mkdir tmp
+echo "Hello, world" >> tmp/file1.txt
+echo "Hello, hello" >> tmp/file2.txt
+git status
+git add .gitignore
+git commit -m "add .gitignore"
+
+6.
+git push gitlab develop
+git push gitlab feature/new-site
+git push gitlab v0.1
