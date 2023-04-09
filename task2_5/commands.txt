@@ -1,0 +1,34 @@
+1.
+git clone https://gitlab-trainee.inno.ws/git-moodle-cource/git-squash.git
+git remote add gitlab 
+ssh://git@gitlab-trainee.inno.ws:54995/milana.antonova/devops-task-force.git
+git push gitlab --all
+git checkout develop
+git log
+git rebase -i --root
+git log
+git push gitlab develop
+git push --force gitlab develop
+
+2.
+git clone https://gitlab-trainee.inno.ws/git-moodle-cource/git-rebase.git
+git remote add gitlab 
+ssh://git@gitlab-trainee.inno.ws:54995/milana.antonova/devops-task-rebase-pr.git
+git checkout develop
+git checkout feature
+git push gitlab --all
+
+3.
+git clone https://gitlab-trainee.inno.ws/git-moodle-cource/git-merge.git
+git remote add gitlab 
+ssh://git@gitlab-trainee.inno.ws:54995/milana.antonova/devops-task-merge-pr.git
+git push gitlab --all
+
+4.
+git clone 
+ssh://git@gitlab-trainee.inno.ws:54995/milana.antonova/git-checkout.git
+git checkout feature
+echo "The Philippines consists of 7,641 islands" >> information.txt
+git add .
+git commit -m "add information.txt"
+git push origin feature
