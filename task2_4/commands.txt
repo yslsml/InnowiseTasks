@@ -1,0 +1,35 @@
+1.
+git clone https://gitlab-trainee.inno.ws/git-moodle-cource/git-rebase.git
+git checkout feature
+git checkout develop
+git rebase feature
+git checkout master
+git rebase develop
+git remote add gitlab 
+https://gitlab-trainee.inno.ws/milana.antonova/devops-task-rebase.git
+git push gitlab --all
+
+2.
+git clone https://gitlab-trainee.inno.ws/git-moodle-cource/git-squash.git
+git checkout develop
+git log
+git rebase -i HEAD~6  # on fix 1-5 write "s"
+git log
+git remote add gitlab 
+ssh://git@gitlab-trainee.inno.ws:54995/milana.antonova/devops-task-squash.git
+git push gitlab --all
+
+3.
+git clone 
+https://gitlab-trainee.inno.ws/git-moodle-cource/git-cherry-pick.git
+git checkout develop
+git log
+git checkout master
+git cherry-pick bf38ea1
+nano main.go
+git add main.go
+git cherry-pick --continue
+git log
+git remote add gitlab 
+ssh://git@gitlab-trainee.inno.ws:54995/milana.antonova/devops-task-cherry-pick.git
+git push gitlab --all
