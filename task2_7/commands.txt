@@ -1,0 +1,25 @@
+1. 
+cat ~/.gitconfig
+
+2. 
+nano ~/.gitconfig
+
+[includeIf "gitdir:~/innowise/"]
+	path = ~/.gitconfig-innowise
+
+3.
+nano ~/.gitconfig-innowise
+
+[user]
+	name = Аркадий Паровозов
+	email = arkadiy_parovozov@innowise-group.com
+
+4.
+mkdir innowise
+cd innowise
+mkdir git-config
+cd git-config
+git init
+echo "Some info" >> text.txt
+git add .
+git commit -m "add text.txt"
