@@ -1,0 +1,25 @@
+1.
+git init
+git submodule add https://github.com/WordPress/WordPress
+git status
+cd WordPress
+git fetch -a
+git tag -l
+git checkout 3.4.2
+cd ..
+git add .
+git commit -m "add WordPress submodule and changed to 3.4.2 tag"
+
+2.
+cp wordpress/index.php index.php
+cp wordpress/wp-config-sample.php wp-config.php
+cp -Rf wordpress/wp-content .
+rm -Rf wp-content/plugins/hello.php wp-content/themes/twentyten
+
+3.
+nano index.php # require('wordpress/wp-blog-header.php'); on 17th line
+git add .
+git commit -m "add files from submodule"
+git remote add gitlab 
+ssh://git@gitlab-trainee.inno.ws:54995/milana.antonova/devops-task-submodule.git
+git push gitlab --all
