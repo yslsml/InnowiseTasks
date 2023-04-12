@@ -1,0 +1,31 @@
+1.
+git init
+echo "My file" >> file.txt
+git add .
+git commit -m "add file.txt"
+git checkout -b develop
+echo "My second file" >> file2.txt
+git add .
+git commit -m "add file2.txt"
+git merge master
+nano file2.txt
+git add .
+git commit -m "edit file2.txt"
+git checkout -b feature
+echo "My feature" >> feature.txt
+git add .
+git commit -m "add feature.txt"
+git checkout develop
+echo "Develop" >> develop.txt
+git add .
+git commit -m "add develop.txt"
+git remote add gitlab 
+ssh://git@gitlab-trainee.inno.ws:54995/milana.antonova/devops-task-flows.git
+git push gitlab --all
+
+2.
+git pull gitlab develop
+git pull gitlab master
+git tag release_1.1
+git log
+git push gitlab release_1.1 # or git push gitlab --tags
